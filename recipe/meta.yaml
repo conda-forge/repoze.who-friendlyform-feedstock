@@ -13,23 +13,25 @@ source:
 
 build:
   noarch: python
-  number: 1
+  number: 2
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
     - setuptools
 
   run:
-    - python
+    - python >={{ python_min }}
     - repoze.who >=1.0
     - zope.interface
     - paste
     - webob >=0.9.7
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - repoze.who.plugins.friendlyform
 
